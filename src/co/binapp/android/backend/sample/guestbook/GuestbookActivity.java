@@ -14,6 +14,7 @@
 
 package co.binapp.android.backend.sample.guestbook;
 
+import co.binapp.android.R;
 import co.binapp.android.backend.core.CloudBackendFragment;
 import co.binapp.android.backend.core.CloudCallbackHandler;
 import co.binapp.android.backend.core.CloudEntity;
@@ -21,8 +22,6 @@ import co.binapp.android.backend.core.Consts;
 import co.binapp.android.backend.core.CloudBackendFragment.OnListener;
 import co.binapp.android.backend.core.CloudQuery.Order;
 import co.binapp.android.backend.core.CloudQuery.Scope;
-
-import com.google.cloud.backend.R;
 
 import android.app.Activity;
 import android.app.FragmentManager;

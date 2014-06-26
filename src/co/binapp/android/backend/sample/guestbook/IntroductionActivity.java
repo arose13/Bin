@@ -1,7 +1,6 @@
 package co.binapp.android.backend.sample.guestbook;
 
-import com.google.cloud.backend.R;
-
+import co.binapp.android.R;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;

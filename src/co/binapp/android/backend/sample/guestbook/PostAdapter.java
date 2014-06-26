@@ -1,8 +1,7 @@
 package co.binapp.android.backend.sample.guestbook;
 
+import co.binapp.android.R;
 import co.binapp.android.backend.core.CloudEntity;
-
-import com.google.cloud.backend.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;
