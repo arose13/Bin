@@ -1,5 +1,7 @@
 package co.binapp.android.views;
 
-public class MainView {
+import co.binapp.android.activities.ViewActivity;
+
+public class MainView extends ViewActivity {
 
 }
