@@ -4,7 +4,7 @@
     android:versionName="1.0" 
     package="co.binapp.android">
 
-    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="16"/>
+    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="20"/>
 
     <permission android:name="com.google.cloud.backend.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
 
@@ -17,9 +17,9 @@
 
     <application android:allowBackup="true" android:icon="@drawable/ic_launcher_guestbook" android:label="@string/app_name" android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-        <activity 
-            android:name="co.binapp.android.backend.sample.guestbook.GuestbookActivity"
-            android:configChanges="orientation|screenSize" 
+        
+        <activity
+            android:name="co.binapp.android.views.SignInView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -27,6 +27,16 @@
             </intent-filter>
         </activity>
         
+        <activity
+            android:name="co.binapp.android.views.MainView"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAINVIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+                
         <activity 
             android:name="co.binapp.android.backend.sample.guestbook.IntroductionActivity" 
             android:parentActivityName="co.binapp.android.backend.sample.guestbook.GuestbookActivity" 
