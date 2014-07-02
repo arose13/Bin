@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginVerySmall">4dp</dimen>
+    <dimen name="marginSmall">8dp</dimen>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="marginMedium">24dp</dimen>
+    <dimen name="marginLarge">32dp</dimen>
+    <dimen name="marginLargest">64dp</dimen>
+    
+    <dimen name="textBody">14sp</dimen>
+    <dimen name="textSubhead">16sp</dimen>
+    <dimen name="textTitle">20sp</dimen>
+    <dimen name="textHeadline">24sp</dimen>
+    <dimen name="textDisplay1">34sp</dimen>
+    <dimen name="textDisplay2">45sp</dimen>
+    <dimen name="textDisplay3">56sp</dimen>
+    <dimen name="textAppTitle">96sp</dimen>
+</resources>

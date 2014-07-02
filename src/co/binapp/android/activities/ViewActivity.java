@@ -1,5 +1,5 @@
 package co.binapp.android.activities;
 
-public class ViewActivity extends BaseActivity {
+public abstract class ViewActivity extends BaseActivity {
 
 }

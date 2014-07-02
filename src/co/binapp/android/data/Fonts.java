@@ -10,7 +10,12 @@ public class Fonts {
 	private static final String FRONT = "fonts/";
 	private static final String BACK = ".ttf";
 	
-	public static final String APPNAME_FONT = FRONT + "" + BACK;
+	public static final class Amatic {
+		private static final String AMATICGROUP = FRONT + "AmaticSC-";
+		
+		public static final String BOLD = AMATICGROUP + "Bold" + BACK;
+		public static final String REGULAR = AMATICGROUP + "Regular" + BACK;
+	}
 	
 	public static final class Roboto {
 		private static final String ROBOTOGROUP = FRONT + "Roboto-";
