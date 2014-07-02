@@ -15,7 +15,8 @@ public class GPlusConstants {
 	
 	public static String[] SCOPES = new String[] {
 		Scopes.PLUS_LOGIN, // GPlus login scope
-		Scopes.PLUS_ME // GPlus profile scope
+		Scopes.PLUS_ME, // GPlus profile scope
+		"https://www.googleapis.com/auth/userinfo.email" // GPlus get Email from user
 	};
 	
 }

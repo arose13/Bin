@@ -14,10 +14,14 @@ import android.widget.Toast;
 import co.binapp.android.R;
 import co.binapp.android.activities.ViewActivity;
 import co.binapp.android.data.Fonts.Amatic;
+import co.binapp.android.data.LogStrings.ViewNames;
 import co.binapp.android.data.GPlusConstants;
 import co.binapp.android.data.LogStrings;
+import co.binapp.android.data.SharedPrefs;
 
 public class SignInView extends ViewActivity implements OnClickListener {
+	
+	private SharedPrefs sharedPrefs;
 	
 	private TextView appTitle;
 	private View signinButton;
@@ -79,8 +83,14 @@ public class SignInView extends ViewActivity implements OnClickListener {
 		super.onPeopleLoaded(status, personBuffer, nextPageToken);
 		if (status.getErrorCode() == ConnectionResult.SUCCESS) {
 			mPerson = personBuffer.get(0);
+			/* Saving user to Shared Prefs */
+			if (sharedPrefs.saveUserToSharedPrefs(mPerson.getId(), contextActivity)) {
+				Log.d(ViewNames.SIGNIN_VIEW, "UserID saved to sharedPrefs");
+			} else {
+				Log.e(ViewNames.SIGNIN_VIEW, "UserID was not saved");
+			}
+			
 			// TODO Go to MainView
-			Toast.makeText(this, "signin successful", Toast.LENGTH_SHORT).show();
 		} else if (status.getErrorCode() == ConnectionResult.NETWORK_ERROR) {
 			Toast.makeText(this, R.string.networkerror, Toast.LENGTH_SHORT).show();
 		}

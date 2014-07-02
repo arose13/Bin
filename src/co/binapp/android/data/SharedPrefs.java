@@ -17,12 +17,12 @@ public class SharedPrefs {
 		public static final String NUM_OF_BINS = appPackage + "NUMBEROFBINS"; // Number of entries in the DS
 	}
 	
-	public SharedPreferences buildSharedPreference(String key, Context context) {
+	private SharedPreferences buildSharedPreference(String key, Context context) {
 		return context.getSharedPreferences(key, Context.MODE_PRIVATE);
 	}
 	
 	/* UserEmail Methods */
-	public SharedPreferences getUserEmailSharedPrefs(Context context) {
+	private SharedPreferences getUserEmailSharedPrefs(Context context) {
 		return buildSharedPreference(Keys.USEREMAIL, context);
 	}
 	
@@ -52,7 +52,7 @@ public class SharedPrefs {
 	/* End of UserEmail Methods */
 	
 	/* PayingUser Methods */
-	public SharedPreferences getPayingUserSharedPrefs(Context context) {
+	private SharedPreferences getPayingUserSharedPrefs(Context context) {
 		return buildSharedPreference(Keys.PAYINGUSER, context);
 	}
 	/* End of PayingUser Methods */
