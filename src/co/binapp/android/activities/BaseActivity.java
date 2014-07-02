@@ -40,6 +40,11 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		/* Starting all app's context */
+		contextActivity = getApplicationContext();
+		
+		/* Google Plus Setup */
 		mPlusClient = new PlusClient.Builder(this, this, this)
 			.setScopes(GPlusConstants.SCOPES)
 			.setActions(GPlusConstants.VISABLE_ACTIVITIES)

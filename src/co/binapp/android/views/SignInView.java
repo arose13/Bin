@@ -43,7 +43,8 @@ public class SignInView extends ViewActivity implements OnClickListener {
 	public void onClick(View v) {
 		if (v.getId() == R.id.signInButtonGoogle && !mPlusClient.isConnected()) {
 			if (mConnectionResult == null) {
-				
+				mConnectionProgressDialog.show();
+				signinButton.setVisibility(View.VISIBLE);
 			} else {
 				try {
 					mConnectionResult.startResolutionForResult(this, GPlusConstants.REQUEST_CODE_RESOLVE_ERR);
