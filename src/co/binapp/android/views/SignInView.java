@@ -3,6 +3,7 @@ package co.binapp.android.views;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.plus.model.people.PersonBuffer;
 
+import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import co.binapp.android.R;
 import co.binapp.android.activities.ViewActivity;
 import co.binapp.android.data.Fonts.Amatic;
 import co.binapp.android.data.LogStrings.ViewNames;
+import co.binapp.android.data.AnimationConstants;
 import co.binapp.android.data.GPlusConstants;
 import co.binapp.android.data.LogStrings;
 import co.binapp.android.data.SharedPrefs;
@@ -81,7 +83,7 @@ public class SignInView extends ViewActivity implements OnClickListener {
 	public void onPeopleLoaded(ConnectionResult status, PersonBuffer personBuffer, String nextPageToken) {
 		super.onPeopleLoaded(status, personBuffer, nextPageToken);
 		if (status.getErrorCode() == ConnectionResult.SUCCESS) {
-			/* Saving user to Shared Prefs */
+			/* Saving user to Shared Preferences */
 			Log.d(ViewNames.SIGNIN_VIEW, "UserPlusID = " + userPlusID);
 			if (sharedPrefs.saveUserToSharedPrefs(userPlusID, contextActivity)) {
 				Log.d(ViewNames.SIGNIN_VIEW, "UserID saved to sharedPrefs");
@@ -89,7 +91,10 @@ public class SignInView extends ViewActivity implements OnClickListener {
 				Log.e(ViewNames.SIGNIN_VIEW, "UserID was not saved");
 			}
 			
-			// TODO Go to MainView
+			// Goto MainView
+			gotoView(new Intent(SignInView.this, MainView.class), AnimationConstants.Transitions.FROM_RIGHT);
+			finish();
+			
 		} else if (status.getErrorCode() == ConnectionResult.NETWORK_ERROR) {
 			Log.e(ViewNames.SIGNIN_VIEW, getResources().getString(R.string.networkerror));
 			Toast.makeText(this, R.string.networkerror, Toast.LENGTH_SHORT).show();
