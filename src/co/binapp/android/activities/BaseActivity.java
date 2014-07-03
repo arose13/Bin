@@ -12,6 +12,7 @@ import co.binapp.android.R;
 import co.binapp.android.data.Fonts;
 import co.binapp.android.data.GPlusConstants;
 import co.binapp.android.data.LogStrings.ViewNames;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -120,4 +121,5 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 	}
 	
 	/* Custom Methods Below */
+	
 }

@@ -12,25 +12,26 @@ public class SharedPrefs {
 	public static final int FREE_BIN_LIMIT = 20;
 	
 	public class Keys {
-		public static final String USEREMAIL = appPackage + "USEREMAIL"; // Last logged in email
+		public static final String USERID = appPackage + "USERID"; // Last logged in email
 		public static final String PAYINGUSER = appPackage + "PAYINGUSER"; // 1 = true 0 = false
 		public static final String NUM_OF_BINS = appPackage + "NUMBEROFBINS"; // Number of entries in the DS
 	}
 	
+	/* Shared Preferences Methods Below */
 	private SharedPreferences buildSharedPreference(String key, Context context) {
 		return context.getSharedPreferences(key, Context.MODE_PRIVATE);
 	}
 	
 	/* UserEmail Methods */
 	private SharedPreferences getUserEmailSharedPrefs(Context context) {
-		return buildSharedPreference(Keys.USEREMAIL, context);
+		return buildSharedPreference(Keys.USERID, context);
 	}
 	
-	public boolean saveUserToSharedPrefs(String userEmail, Context context) {
+	public boolean saveUserToSharedPrefs(String userID, Context context) {
 		SharedPreferences.Editor editor = getUserEmailSharedPrefs(context).edit();
 		
-		if ((!userEmail.isEmpty()) && (userEmail != "")) {
-			editor.putString(Keys.USEREMAIL, userEmail);
+		if ((!userID.isEmpty()) && (userID != "")) {
+			editor.putString(Keys.USERID, userID);
 			editor.commit();
 			
 			if (!readFromSavedUser(context).equals("")) {
@@ -47,13 +48,15 @@ public class SharedPrefs {
 	}
 	
 	public String readFromSavedUser(Context appContext) {
-		return getUserEmailSharedPrefs(appContext).getString(Keys.USEREMAIL, "");
+		return getUserEmailSharedPrefs(appContext).getString(Keys.USERID, "");
 	}
 	/* End of UserEmail Methods */
 	
 	/* PayingUser Methods */
-	private SharedPreferences getPayingUserSharedPrefs(Context context) {
-		return buildSharedPreference(Keys.PAYINGUSER, context);
-	}
+	// TODO: Enable paying users
+//	private SharedPreferences getPayingUserSharedPrefs(Context context) {
+//		return buildSharedPreference(Keys.PAYINGUSER, context);
+//	}
 	/* End of PayingUser Methods */
+
 }

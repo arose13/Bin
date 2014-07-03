@@ -21,7 +21,7 @@ import co.binapp.android.data.SharedPrefs;
 
 public class SignInView extends ViewActivity implements OnClickListener {
 	
-	private SharedPrefs sharedPrefs;
+	private SharedPrefs sharedPrefs = new SharedPrefs();
 	
 	private TextView appTitle;
 	private View signinButton;
@@ -31,7 +31,6 @@ public class SignInView extends ViewActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.signin_view);
-		contextActivity = getApplicationContext();
 		
 		/* Initialize Views */
 		signinButton = findViewById(R.id.signInButtonGoogle);
@@ -82,9 +81,9 @@ public class SignInView extends ViewActivity implements OnClickListener {
 	public void onPeopleLoaded(ConnectionResult status, PersonBuffer personBuffer, String nextPageToken) {
 		super.onPeopleLoaded(status, personBuffer, nextPageToken);
 		if (status.getErrorCode() == ConnectionResult.SUCCESS) {
-			mPerson = personBuffer.get(0);
 			/* Saving user to Shared Prefs */
-			if (sharedPrefs.saveUserToSharedPrefs(mPerson.getId(), contextActivity)) {
+			Log.d(ViewNames.SIGNIN_VIEW, "UserPlusID = " + userPlusID);
+			if (sharedPrefs.saveUserToSharedPrefs(userPlusID, contextActivity)) {
 				Log.d(ViewNames.SIGNIN_VIEW, "UserID saved to sharedPrefs");
 			} else {
 				Log.e(ViewNames.SIGNIN_VIEW, "UserID was not saved");
@@ -92,6 +91,7 @@ public class SignInView extends ViewActivity implements OnClickListener {
 			
 			// TODO Go to MainView
 		} else if (status.getErrorCode() == ConnectionResult.NETWORK_ERROR) {
+			Log.e(ViewNames.SIGNIN_VIEW, getResources().getString(R.string.networkerror));
 			Toast.makeText(this, R.string.networkerror, Toast.LENGTH_SHORT).show();
 		}
 	}
