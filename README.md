@@ -8,3 +8,4 @@ TIMELINE
 - June 30th 2014 = DS functionality
 - July 2nd 2014 = SignInView complete
 - July 3rd 2014 = MainView started
+- July 4th 2014 = DataStore Scheme created
