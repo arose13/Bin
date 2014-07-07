@@ -230,7 +230,7 @@ public class GuestbookActivity extends Activity implements OnListener {
      * onClick method.
      */
     public void onSendButtonPressed(View view) {
-
+    	// TODO THIS IS HOW INFORMATION IS POSTED TO THE SERVER!
         // create a CloudEntity with the new post
         CloudEntity newPost = new CloudEntity("Guestbook");
         newPost.put("message", mMessageTxt.getText().toString());
