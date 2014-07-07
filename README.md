@@ -9,3 +9,4 @@ TIMELINE
 - July 2nd 2014 = SignInView complete
 - July 3rd 2014 = MainView started
 - July 4th 2014 = DataStore Scheme created
+- July 7th 2014 = EntryView started
