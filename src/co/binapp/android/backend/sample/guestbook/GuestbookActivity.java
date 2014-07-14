@@ -195,7 +195,7 @@ public class GuestbookActivity extends Activity implements OnListener {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
         // Check to see if we have retained the fragment which handles
-        // asynchronous backend calls
+        // asynchronous BackEnd calls
         mProcessingFragment = (CloudBackendFragment) mFragmentManager.
                 findFragmentByTag(PROCESSING_FRAGMENT_TAG);
         // If not retained (or first time running), create a new one

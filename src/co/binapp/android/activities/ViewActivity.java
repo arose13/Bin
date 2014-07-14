@@ -1,6 +1,7 @@
 package co.binapp.android.activities;
 
 import android.content.Intent;
+import android.view.Menu;
 
 import co.binapp.android.R;
 import co.binapp.android.data.AnimationConstants;
@@ -18,6 +19,10 @@ public abstract class ViewActivity extends BaseActivity {
 		default:
 			break;
 		}
-	} 
+	}
+	
+	protected void inflateActionBar(int resID, Menu menu) {
+		getMenuInflater().inflate(resID, menu);
+	}
 	
 }

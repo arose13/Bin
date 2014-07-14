@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Bin</string>
-    <string name="write_something">Write Something...</string>
+    <string name="write_something">Write Something#8230</string>
     <string name="hello_world">Hello world!</string>
     <string name="switch_account">Switch Account</string>
     <string name="view_intro">View Intro</string>
@@ -10,6 +10,7 @@
     <string name="announce_success">YOU HAVE JOINED</string>
     <string name="announce_fail">CONNECTION FAILED</string>
     <string name="send">Send</string>
+    <string name="done">Done</string>
     <string name="send_message">sendMessage</string>
     <string name="empty_string"></string>
     <string name="no_messages">No messages yet</string>
