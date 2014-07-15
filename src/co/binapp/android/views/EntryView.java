@@ -2,8 +2,6 @@ package co.binapp.android.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -63,26 +61,6 @@ public class EntryView extends ViewActivity {
 	private void initViews() {
 		inputText = (EditText) findViewById(R.id.entryviewEditText);
 		mFonts.typeFaceConstructor(inputText, Roboto.LIGHT, getAssets());
-		inputText.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if ((count != 0) && (entryViewMenuVisable == false)) {
-					inflateActionBar(R.menu.entryview_menu, entryViewMenu);
-					entryViewMenuVisable = true;
-				}
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,	int after) {
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				
-			}
-		});
 	}
 	
 	private void checkPreferences() {
@@ -93,6 +71,7 @@ public class EntryView extends ViewActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		entryViewMenu = menu;
+		inflateActionBar(R.menu.entryview_menu, entryViewMenu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
