@@ -2,6 +2,7 @@ package co.binapp.android.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -13,6 +14,8 @@ import co.binapp.android.data.Fonts.Roboto;
 import co.binapp.android.data.StringProcessor;
 
 public class EntryView extends ViewActivity {
+	
+	public static final String TAG = EntryView.class.getName();
 	
 	private int entryType = TypeValues.TEXT;	
 	private boolean entryViewMenuVisable = false;
@@ -35,6 +38,10 @@ public class EntryView extends ViewActivity {
 		
 		initViews();
 		checkPreferences();
+	}
+	
+	@Override
+	protected void onStart() {
 		handleExternalIntent(); /* Deal with Incoming Intent */
 	}
 	
@@ -93,6 +100,7 @@ public class EntryView extends ViewActivity {
 	private boolean addEntry() {
 		if (mStringProcessor.containsLinkCheck(inputText.getText().toString())) {
 			entryType = TypeValues.LINK;
+			Log.d(TAG, "addEntry 1st if completed");
 		}
 		return false;
 	}

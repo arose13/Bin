@@ -15,13 +15,13 @@ import android.widget.Toast;
 import co.binapp.android.R;
 import co.binapp.android.activities.ViewActivity;
 import co.binapp.android.data.Fonts.Amatic;
-import co.binapp.android.data.LogStrings.ViewNames;
 import co.binapp.android.data.AnimationConstants;
 import co.binapp.android.data.GPlusConstants;
-import co.binapp.android.data.LogStrings;
 import co.binapp.android.data.SharedPrefs;
 
 public class SignInView extends ViewActivity implements OnClickListener {
+	
+	public static final String TAG = SignInView.class.getName();
 	
 	private SharedPrefs sharedPrefs = new SharedPrefs();
 	
@@ -38,7 +38,7 @@ public class SignInView extends ViewActivity implements OnClickListener {
 		signinButton = findViewById(R.id.signInButtonGoogle);
 		signinButton.setVisibility(View.INVISIBLE);
 		signinButton.setOnClickListener(this);
-		Log.d(LogStrings.ViewNames.SIGNIN_VIEW, "SigninView page load");
+		Log.d(TAG, "SigninView page load");
 		
 		appTitle = (TextView) findViewById(R.id.titleTextView);
 		mFonts.typeFaceConstructor(appTitle, Amatic.BOLD, getAssets());
@@ -84,11 +84,11 @@ public class SignInView extends ViewActivity implements OnClickListener {
 		super.onPeopleLoaded(status, personBuffer, nextPageToken);
 		if (status.getErrorCode() == ConnectionResult.SUCCESS) {
 			/* Saving user to Shared Preferences */
-			Log.d(ViewNames.SIGNIN_VIEW, "UserPlusID = " + userPlusID);
+			Log.d(TAG, "UserPlusID = " + userPlusID);
 			if (sharedPrefs.saveUserToSharedPrefs(userPlusID, contextActivity)) {
-				Log.d(ViewNames.SIGNIN_VIEW, "UserID saved to sharedPrefs");
+				Log.d(TAG, "UserID saved to sharedPrefs");
 			} else {
-				Log.e(ViewNames.SIGNIN_VIEW, "UserID was not saved");
+				Log.e(TAG, "UserID was not saved");
 			}
 			
 			// Goto MainView
@@ -96,7 +96,7 @@ public class SignInView extends ViewActivity implements OnClickListener {
 			finish();
 			
 		} else if (status.getErrorCode() == ConnectionResult.NETWORK_ERROR) {
-			Log.e(ViewNames.SIGNIN_VIEW, getResources().getString(R.string.networkerror));
+			Log.e(TAG, getResources().getString(R.string.networkerror));
 			Toast.makeText(this, R.string.networkerror, Toast.LENGTH_SHORT).show();
 		}
 	}

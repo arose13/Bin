@@ -11,7 +11,6 @@ import com.google.android.gms.plus.model.people.PersonBuffer;
 import co.binapp.android.R;
 import co.binapp.android.data.Fonts;
 import co.binapp.android.data.GPlusConstants;
-import co.binapp.android.data.LogStrings.ViewNames;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -22,6 +21,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 public abstract class BaseActivity extends Activity implements ConnectionCallbacks, OnConnectionFailedListener, OnPeopleLoadedListener {
+	
+	public static final String TAG = BaseActivity.class.getName();
 	
 	protected Fonts mFonts = new Fonts();
 	
@@ -59,7 +60,7 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 	protected void onStart() {
 		super.onStart();
 		mPlusClient.connect();
-		Log.d(ViewNames.SIGNIN_VIEW, "Plus Client connected");
+		Log.d(TAG, "Plus Client connected");
 	}
 	
 	@Override
@@ -92,8 +93,8 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 			//User's name and userId
 			userFullName = mPerson.getName().getGivenName() + " " + mPerson.getName().getFamilyName();
 			userPlusID = mPerson.getId();
-			Log.i(ViewNames.BASE_ACTIVITY, userFullName);
-			Log.i(ViewNames.BASE_ACTIVITY, userPlusID);
+			Log.i(TAG, userFullName);
+			Log.i(TAG, userPlusID);
 		}
 	}
 	
@@ -112,12 +113,12 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 		if (mConnectionProgressDialog.isShowing()) {
 			mConnectionProgressDialog.dismiss();
 		}
-		Log.i(ViewNames.SIGNIN_VIEW, "User is connected");
+		Log.i(TAG, "User is connected");
 	}
 	
 	@Override
 	public void onDisconnected() {
-		Log.i(ViewNames.SIGNIN_VIEW, "gplus disconnected");
+		Log.i(TAG, "gplus disconnected");
 	}
 	
 	/* Custom Methods Below */
