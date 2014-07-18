@@ -17,8 +17,7 @@ public class EntryView extends ViewActivity {
 	
 	public static final String TAG = EntryView.class.getName();
 	
-	private int entryType = TypeValues.TEXT;	
-	private boolean entryViewMenuVisable = false;
+	private int entryType = TypeValues.TEXT;
 	
 	private Menu entryViewMenu;
 	private EditText inputText;	
@@ -99,8 +98,13 @@ public class EntryView extends ViewActivity {
 
 	private boolean addEntry() {
 		if (mStringProcessor.containsLinkCheck(inputText.getText().toString())) {
+			/* Link Content */
 			entryType = TypeValues.LINK;
-			Log.d(TAG, "addEntry 1st if completed");
+			Log.d(TAG, "addEntry 1st if is TRUE");
+		} else {
+			/* Ordinary Entry */
+			entryType = TypeValues.TEXT;
+			Log.d(TAG, "addEntry 1st if is FALSE");
 		}
 		return false;
 	}
