@@ -24,11 +24,19 @@ public class EntryView extends ViewActivity {
 	private int entryType = TypeValues.TEXT;
 	
 	private Menu entryViewMenu;
-	private EditText inputText;	
+	private EditText inputTitle;
+	private EditText inputBody;
 	
 	private Intent externalIntent;
 	private String externalIntentAction;
 	private String externalIntentType;
+	
+	private String title = "";
+	private String content = "";
+	private String url = "";
+	private String imageUrl = "";
+	private String tags = "";
+	private String hexColor = "";
 	
 	private StringProcessor mStringProcessor;
 	
@@ -61,16 +69,19 @@ public class EntryView extends ViewActivity {
 			String sharedText = externalIntent.getStringExtra(Intent.EXTRA_TEXT);
 			String sharedSubject = externalIntent.getStringExtra(Intent.EXTRA_SUBJECT);
 			if ((sharedText != null) && (sharedSubject != null)) {
-				inputText.setText(sharedSubject + " " + sharedText);
+				inputTitle.setText(sharedSubject);
+				inputBody.setText(sharedText);
 			} else if (sharedText != null) {
-				inputText.setText(sharedText);
+				inputBody.setText(sharedText);
 			}
 		}
 	}
 
 	private void initViews() {
-		inputText = (EditText) findViewById(R.id.entryviewEditText);
-		mFonts.typeFaceConstructor(inputText, Roboto.LIGHT, getAssets());
+		inputTitle = (EditText) findViewById(R.id.entryviewEditTextTitle);
+		inputBody = (EditText) findViewById(R.id.entryviewEditTextBody);
+		mFonts.typeFaceConstructor(inputTitle, Roboto.BOLD, getAssets());
+		mFonts.typeFaceConstructor(inputBody, Roboto.LIGHT, getAssets());
 	}
 	
 	private void checkPreferences() {
@@ -99,17 +110,17 @@ public class EntryView extends ViewActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+	
+	private void getStringsFromEditTextViews() {
+		title = inputTitle.getText().toString();
+		content = inputBody.getText().toString();
+	}
 
 	private boolean processEntry() {
 		
-		String title = "";
-		String content = "";
-		String url = "";
-		String imageUrl = "";
-		String tags = "";
-		String hexColor = "";
+		getStringsFromEditTextViews();
 		
-		if (mStringProcessor.containsLinkCheck(inputText.getText().toString())) {
+		if (mStringProcessor.containsLinkCheck(content)) {
 			/* URL */
 			entryType = TypeValues.LINK;
 			Log.d(TAG, "addEntry 1st if is TRUE");
@@ -117,11 +128,21 @@ public class EntryView extends ViewActivity {
 			/* Ordinary Entry */
 			entryType = TypeValues.TEXT;
 			Log.d(TAG, "addEntry 1st if is FALSE");
-			saveEntry(entryType, title, content, url, imageUrl, tags, hexColor);
 		}
-		return false;
+		
+		if (privateEntry) {
+			// It is private therefore change the type and save
+			entryType = TypeValues.PRIVATE;
+		} else {
+			// It is not private therefore don't modify the entryType
+		}
+		
+		Log.i(TAG, "[" + entryType + " , " + title + " , " + content + " ]");
+		saveEntry(entryType, title, content, url, imageUrl, tags, hexColor);
+		
+		return false; /* TODO when the save to DS is complete this must return true! */
 	}
-	
+
 	private void saveEntry(int type, String title, String content, String url, String imageUrl, String tags, String hexColor) {
 		CloudEntity newEntry = new CloudEntity(DataStoreConstants.Bins.CLOUD_ENTITY);
 		newEntry.put(Bins.Keys.TYPE, type);
@@ -131,8 +152,7 @@ public class EntryView extends ViewActivity {
 		newEntry.put(Bins.Keys.IMAGE_URL, imageUrl);
 		newEntry.put(Bins.Keys.TAGS, tags);
 		newEntry.put(Bins.Keys.COLOR, hexColor);
-		/* TODO fill in userID 
-		 * newEntry.put(Bins.Keys.USERID, USERID) */
+		newEntry.put(Bins.Keys.USERID, "01234567"); /* TODO fill in userID */
 	}
 	
 }

@@ -5,7 +5,13 @@
     android:orientation="vertical" >
     
     <EditText
-        android:id="@+id/entryviewEditText"
+        android:id="@+id/entryviewEditTextTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/write_title" />
+    
+    <EditText
+        android:id="@+id/entryviewEditTextBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoLink="all"
