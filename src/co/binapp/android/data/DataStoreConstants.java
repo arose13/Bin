@@ -3,7 +3,7 @@ package co.binapp.android.data;
 public class DataStoreConstants {
 	
 	public static class Bins {
-		public static final String KIND_NAME = "Bins";
+		public static final String CLOUD_ENTITY = "Bins";
 		
 		public static class Keys {
 			public static final String TYPE = "type";         // The type of Entry, it also checks if it is porn [int]
