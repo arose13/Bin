@@ -8,6 +8,8 @@ import co.binapp.android.data.AnimationConstants;
 
 public abstract class ViewActivity extends BaseActivity {
 	
+	public static final String TAG = ViewActivity.class.getName();
+	
 	protected void gotoView(Intent toThisView, int transitionAnimation) {
 		startActivity(toThisView);
 		

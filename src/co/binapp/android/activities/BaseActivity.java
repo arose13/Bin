@@ -53,7 +53,7 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 			.build();
 		// Progress bar to be displayed if the connection failure is not resolved
 		mConnectionProgressDialog = new ProgressDialog(this);
-		mConnectionProgressDialog.setMessage(getString(R.string.signingin));
+		mConnectionProgressDialog.setMessage(getString(R.string.signingin));;
 	}
 	
 	@Override
@@ -122,5 +122,5 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 	}
 	
 	/* Custom Methods Below */
-	
+		
 }
