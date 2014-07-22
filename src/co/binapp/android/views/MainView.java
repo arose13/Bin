@@ -2,13 +2,10 @@ package co.binapp.android.views;
 
 import java.util.List;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import co.binapp.android.R;
 import co.binapp.android.activities.DSConnectedActivity;
-import co.binapp.android.backend.core.CloudBackendFragment;
 import co.binapp.android.backend.core.CloudBackendFragment.OnListener;
 import co.binapp.android.backend.core.CloudEntity;
 
