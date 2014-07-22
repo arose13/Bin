@@ -7,12 +7,12 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import co.binapp.android.R;
-import co.binapp.android.activities.ViewActivity;
+import co.binapp.android.activities.DSConnectedActivity;
 import co.binapp.android.backend.core.CloudBackendFragment;
 import co.binapp.android.backend.core.CloudBackendFragment.OnListener;
 import co.binapp.android.backend.core.CloudEntity;
 
-public class MainView extends ViewActivity implements OnListener {
+public class MainView extends DSConnectedActivity implements OnListener {
 	
 	private static final String PROCESSING_FRAGMENT_TAG = "BACKEND_FRAGMENT";
 	

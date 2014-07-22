@@ -3,8 +3,6 @@ package co.binapp.android.views;
 import java.io.IOException;
 import java.util.List;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,8 +11,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import co.binapp.android.R;
-import co.binapp.android.activities.ViewActivity;
-import co.binapp.android.backend.core.CloudBackendFragment;
+import co.binapp.android.activities.DSConnectedActivity;
 import co.binapp.android.backend.core.CloudBackendFragment.OnListener;
 import co.binapp.android.backend.core.CloudCallbackHandler;
 import co.binapp.android.backend.core.CloudEntity;
@@ -24,10 +21,9 @@ import co.binapp.android.data.Fonts.Roboto;
 import co.binapp.android.data.DataStoreConstants;
 import co.binapp.android.data.StringProcessor;
 
-public class EntryView extends ViewActivity implements OnListener {
+public class EntryView extends DSConnectedActivity implements OnListener {
 	
 	public static final String TAG = EntryView.class.getName();
-	private static final String PROCESSING_FRAGMENT_TAG = "BACKEND_FRAGMENT";
 	
 	private boolean privateEntry = false;
 	private int entryType = TypeValues.TEXT;
@@ -47,10 +43,7 @@ public class EntryView extends ViewActivity implements OnListener {
 	private String tags = "";
 	private String hexColor = "";
 	
-	private StringProcessor mStringProcessor;
-	private FragmentManager mFragmentManager;
-	private CloudBackendFragment mProcessingFragment;
-	
+	private StringProcessor mStringProcessor;	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +51,9 @@ public class EntryView extends ViewActivity implements OnListener {
 		setContentView(R.layout.entry_view);
 		
 		mStringProcessor = new StringProcessor();
-		mFragmentManager = getFragmentManager();
 		
 		initViews();
 		checkPreferences();
-		initiateFragments();
 	}
 	
 	@Override
@@ -188,23 +179,6 @@ public class EntryView extends ViewActivity implements OnListener {
 		mProcessingFragment.getCloudBackend().insert(newEntry, handler);
 	}
 	
-    private void initiateFragments() {
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-
-        // Check to see if we have retained the fragment which handles
-        // asynchronous BackEnd calls
-        mProcessingFragment = (CloudBackendFragment) mFragmentManager.findFragmentByTag(PROCESSING_FRAGMENT_TAG);
-        // If not retained (or first time running), create a new one
-        if (mProcessingFragment == null) {
-            mProcessingFragment = new CloudBackendFragment();
-            mProcessingFragment.setRetainInstance(true);
-            fragmentTransaction.add(mProcessingFragment, PROCESSING_FRAGMENT_TAG);
-        }
-        
-        fragmentTransaction.commit();
-
-    }
-
 	@Override
 	public void onCreateFinished() {
 		// TODO from implements OnListener		
