@@ -4,6 +4,7 @@ public class DataStoreConstants {
 	
 	public static class Bins {
 		public static final String CLOUD_ENTITY = "Bins";
+		public static final String TEST_USERID = "01234567";
 		
 		public static class Keys {
 			public static final String TYPE = "type";         // The type of Entry, it also checks if it is porn [int]

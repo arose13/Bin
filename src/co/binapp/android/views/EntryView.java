@@ -168,7 +168,7 @@ public class EntryView extends ViewActivity implements OnListener {
 		newEntry.put(Bins.Keys.IMAGE_URL, imageUrl);
 		newEntry.put(Bins.Keys.TAGS, tags);
 		newEntry.put(Bins.Keys.COLOR, hexColor);
-		newEntry.put(Bins.Keys.USERID, "01234567"); /* TODO fill in userID */
+		newEntry.put(Bins.Keys.USERID, Bins.TEST_USERID); /* TODO fill in userID */
 		
 		CloudCallbackHandler<CloudEntity> handler = new CloudCallbackHandler<CloudEntity>() {
 			
