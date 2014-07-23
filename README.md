@@ -2,6 +2,7 @@ Bin
 ===
 REQIURED
 - Google Play Services
+- JSoup
 
 TIMELINE
 - June 26th 2014 = Created

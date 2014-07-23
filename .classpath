@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="C:/Users/AnthonyRose/AppData/Local/Android/android-sdk/extras/google/gcm/gcm-client/dist/gcm-src.jar"/>
+	<classpathentry kind="lib" path="C:/Users/AnthonyRose/Documents/AppDevelopment/LIBRARIES/JARS/jsoup1.7.3.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
