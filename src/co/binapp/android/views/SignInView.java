@@ -21,7 +21,7 @@ import co.binapp.android.data.SharedPrefs;
 
 public class SignInView extends ViewActivity implements OnClickListener {
 	
-	public static final String TAG = SignInView.class.getName();
+	public static final String TAG = SignInView.class.getSimpleName();
 	
 	private SharedPrefs sharedPrefs = new SharedPrefs();
 	

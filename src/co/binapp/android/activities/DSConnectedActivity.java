@@ -4,10 +4,11 @@ import co.binapp.android.backend.core.CloudBackendFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 
 public abstract class DSConnectedActivity extends ViewActivity {
 	
-	public static final String TAG = DSConnectedActivity.class.getName();
+	public static final String TAG = DSConnectedActivity.class.getSimpleName();
 	private static final String PROCESSING_FRAGMENT_TAG = "BACKEND_FRAGMENT";
 	
 	protected FragmentManager mFragmentManager;
@@ -39,5 +40,7 @@ public abstract class DSConnectedActivity extends ViewActivity {
 
     }
 
-	
+	protected void checkPreferences() {
+		Log.d(TAG, "checkPreferences ran");
+	}
 }

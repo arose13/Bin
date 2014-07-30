@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,10 +21,11 @@ import co.binapp.android.data.DataStoreConstants.Bins.TypeValues;
 import co.binapp.android.data.Fonts.Roboto;
 import co.binapp.android.data.DataStoreConstants;
 import co.binapp.android.data.StringProcessor;
+import co.binapp.android.data.UrlProcessor;
 
 public class EntryView extends DSConnectedActivity implements OnListener {
 	
-	public static final String TAG = EntryView.class.getName();
+	public static final String TAG = EntryView.class.getSimpleName();
 	
 	private boolean privateEntry = false;
 	private int entryType = TypeValues.TEXT;
@@ -43,7 +45,8 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 	private String tags = "";
 	private String hexColor = "";
 	
-	private StringProcessor mStringProcessor;	
+	private StringProcessor mStringProcessor;
+	private UrlProcessor mUrlProcessor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +93,6 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		mFonts.typeFaceConstructor(inputBody, Roboto.LIGHT, getAssets());
 	}
 	
-	private void checkPreferences() {
-		
-	}
-	
 	/* This modifies the actionBar button */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,8 +106,14 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.entryviewDoneBtn:
-			if (processEntry()) {
-				finish();
+			if (isEditTextViewsNotEmpty()) {
+				getStringsFromEditTextViews();
+				EntryView.this.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						new ProcessEntryTaskASync().execute();
+					}
+				});
 			}
 			return true;
 
@@ -117,23 +122,55 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		}
 	}
 	
+	private boolean isEditTextViewsNotEmpty() {
+		if ((inputBody.getText().toString() != "") && (inputBody.getText().toString() != null)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	private void getStringsFromEditTextViews() {
 		title = inputTitle.getText().toString();
 		content = inputBody.getText().toString();
 	}
+	
+	private class ProcessEntryTaskASync extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			processEntry();
+			return true;
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			super.onPostExecute(result);
+			saveEntry(entryType, title, content, url, imageUrl, tags, hexColor);
+			finish(); // Kills the activity
+		}
+		
+	}
 
 	private boolean processEntry() {
 		
-		getStringsFromEditTextViews();
-		
 		if (mStringProcessor.containsLinkCheck(content)) {
 			/* URL */
+			mUrlProcessor = new UrlProcessor();
 			entryType = TypeValues.LINK;
-			Log.d(TAG, "addEntry 1st if is TRUE");
+			url = mUrlProcessor.extractUrlFromString(content);
+			imageUrl = mUrlProcessor.getImageUrlFromUrl(url);
+			
+			/* Makes it either a PHOTO or VIDEO depending on URL */
+			if (mUrlProcessor.isAnImageURL(url)) {
+				entryType = TypeValues.PHOTO;
+			} else if (mUrlProcessor.isYoutubeVideo(url)) {
+				entryType = TypeValues.VIDEO;
+			}
+
 		} else {
 			/* Ordinary Entry */
 			entryType = TypeValues.TEXT;
-			Log.d(TAG, "addEntry 1st if is FALSE");
 		}
 		
 		if (privateEntry) {
@@ -144,7 +181,6 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		}
 		
 		Log.i(TAG, "[" + entryType + " , " + title + " , " + content + " ]");
-		saveEntry(entryType, title, content, url, imageUrl, tags, hexColor);
 		
 		return true ; /* TODO when the save to DS is complete this must return true! */
 	}
@@ -186,7 +222,7 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 
 	@Override
 	public void onBroadcastMessageReceived(List<CloudEntity> message) {
-		// TODO from implements OnListener		
+		// TODO from implements OnListener 	
 	}
 
 	

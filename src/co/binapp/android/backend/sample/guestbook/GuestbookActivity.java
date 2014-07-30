@@ -230,7 +230,6 @@ public class GuestbookActivity extends Activity implements OnListener {
      * onClick method.
      */
     public void onSendButtonPressed(View view) {
-    	// TODO THIS IS HOW INFORMATION IS POSTED TO THE SERVER!
         // create a CloudEntity with the new post
         CloudEntity newPost = new CloudEntity("Guestbook");
         newPost.put("message", mMessageTxt.getText().toString());
@@ -261,6 +260,7 @@ public class GuestbookActivity extends Activity implements OnListener {
     }
 
     /**
+     * TODO THIS GETS THE INFORMATION FROM THE DATASTORE
      * Retrieves the list of all posts from the backend and updates the UI. For
      * demonstration in this sample, the query that is executed is:
      * "SELECT * FROM Guestbook ORDER BY _createdAt DESC LIMIT 50" This query
