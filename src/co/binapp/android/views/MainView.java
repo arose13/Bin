@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 
 import co.binapp.android.R;
 import co.binapp.android.activities.DSConnectedActivity;
@@ -14,11 +18,15 @@ import co.binapp.android.backend.core.CloudQuery.Order;
 import co.binapp.android.backend.core.CloudQuery.Scope;
 import co.binapp.android.backend.core.CloudCallbackHandler;
 import co.binapp.android.backend.core.CloudEntity;
+import co.binapp.android.data.AnimationConstants.Transitions;
 import co.binapp.android.data.DataStoreConstants.Bins;
 
-public class MainView extends DSConnectedActivity implements OnListener {
+public class MainView extends DSConnectedActivity implements OnListener, OnClickListener {
 	
 	public static final String TAG = MainView.class.getSimpleName();
+	
+	/* UI Elements */
+	private ImageView addButton;
 	
 	private List<CloudEntity> binList = new LinkedList<CloudEntity>();
 	
@@ -26,8 +34,15 @@ public class MainView extends DSConnectedActivity implements OnListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_view);
+		
+		initViews();
 	}
 	
+	private void initViews() {
+		addButton = (ImageView) findViewById(R.id.addBtn);
+		addButton.setOnClickListener(this);
+	}
+
 	private void getPosts() {
 		// This handler can either receive a result or an error
 		CloudCallbackHandler<List<CloudEntity>> handler = new CloudCallbackHandler<List<CloudEntity>>() {
@@ -69,6 +84,20 @@ public class MainView extends DSConnectedActivity implements OnListener {
 	@Override
 	public void onBroadcastMessageReceived(List<CloudEntity> message) {
 		//TODO: I have no idea what this does
+	}
+
+	
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.addBtn:
+			Intent toEntryViewIntent = new Intent(MainView.this, EntryView.class);
+			gotoView(toEntryViewIntent, Transitions.FROM_RIGHT);
+			break;
+
+		default:
+			break;
+		}
 	}
 	
 }

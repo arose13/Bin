@@ -17,6 +17,9 @@ public abstract class ViewActivity extends BaseActivity {
 		case AnimationConstants.Transitions.FROM_RIGHT:
 			overridePendingTransition(R.anim.activity_fromright, R.anim.activity_nomotion);
 			break;
+			
+		case AnimationConstants.Transitions.FROM_BOTTOM:
+			overridePendingTransition(R.anim.activity_frombottom, R.anim.activity_nomotion);
 
 		default:
 			break;

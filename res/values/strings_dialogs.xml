@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <string name="networkerror">Network Error</string>
-   <string name="signingin">Signing in#8230;</string> 
+   <string name="signingin">Signing in#8230;</string>
+   <string name="add_a_bin">Add a Bin</string> 
 </resources>
