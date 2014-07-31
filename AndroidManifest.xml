@@ -28,7 +28,7 @@
             android:name="co.binapp.android.views.SignInView"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
-            android:logo="@drawable/ic_logo" >
+            android:logo="@drawable/ic_logo_inverted" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -39,7 +39,7 @@
             android:name="co.binapp.android.views.MainView"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:logo="@drawable/ic_logo" >
+            android:logo="@drawable/ic_logo_inverted" >
             <intent-filter>
                 <action android:name="android.intent.action.MAINVIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -49,7 +49,7 @@
         <activity
             android:name="co.binapp.android.views.EntryView"
             android:label="@string/entryView_Label"
-            android:logo="@drawable/ic_logo" >
+            android:logo="@drawable/ic_logo_inverted" >
             <intent-filter>
                 <action android:name="android.intent.action.ENTRYVIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
