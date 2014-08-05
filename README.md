@@ -12,3 +12,5 @@ TIMELINE
 - July 4th 2014 = DataStore Scheme created
 - July 7th 2014 = EntryView started
 - July 21th 2014 = Posting DS interaction
+- August 5th 2014 = All DS functionality created (A tremendous number of technical
+	non app related problems stalled progress. All because the Mobile BackEnd Starter is buggy)

@@ -26,6 +26,15 @@ public class Fonts {
 		public static final String LIGHT_CONDENSED = ROBOTOGROUP + "LightCondensed" + BACK;
 		public static final String BOLD = ROBOTOGROUP + "Bold" + BACK;
 		
+		public static final class Slab {
+			private static final String ROBOTOSLABGROUP = FRONT + "RobotoSlab-";
+			
+			public static final String THIN = ROBOTOSLABGROUP + "Thin" + BACK;
+			public static final String LIGHT = ROBOTOSLABGROUP + "Light" + BACK;
+			public static final String REGULAR = ROBOTOSLABGROUP + "Regular" + BACK;
+			public static final String BOLD = ROBOTOSLABGROUP + "Bold" + BACK;
+		}
+		
 	}
 	
 	/* TypeFace Constructor */
