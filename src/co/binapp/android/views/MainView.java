@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import co.binapp.android.R;
 import co.binapp.android.activities.DSConnectedActivity;
@@ -27,6 +28,7 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 	
 	/* UI Elements */
 	private ImageView addButton;
+	private ListView binListView;
 	
 	private List<CloudEntity> binList = new LinkedList<CloudEntity>();
 	
@@ -41,6 +43,8 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 	private void initViews() {
 		addButton = (ImageView) findViewById(R.id.addBtn);
 		addButton.setOnClickListener(this);
+		
+		binListView = (ListView) findViewById(R.id.binListView);
 	}
 
 	private void getPosts() {
