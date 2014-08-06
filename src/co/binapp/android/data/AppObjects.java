@@ -1,5 +1,8 @@
 package co.binapp.android.data;
 
+import android.widget.ImageView;
+import android.widget.TextView;
+
 public class AppObjects {
 	
 	/* Contains the List Objects */
@@ -22,5 +25,11 @@ public class AppObjects {
 			this.color = color;
 		}
 	}
-	
+
+	/* UI req'd List Objects */
+	public static class BinListViewHolder {
+		public TextView title;
+		public TextView content;
+		public ImageView image;
+	}
 }

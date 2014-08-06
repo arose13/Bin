@@ -14,3 +14,4 @@ TIMELINE
 - July 21th 2014 = Posting DS interaction
 - August 5th 2014 = All DS functionality created (A tremendous number of technical
 	non app related problems stalled progress. All because the Mobile BackEnd Starter is buggy)
+- August 6th 2014 = ListAdapter and support classes started
