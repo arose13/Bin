@@ -1,7 +1,7 @@
 package co.binapp.android.views;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import co.binapp.android.R;
 import co.binapp.android.activities.DSConnectedActivity;
 import co.binapp.android.backend.core.CloudBackendFragment.OnListener;
@@ -19,8 +18,11 @@ import co.binapp.android.backend.core.CloudQuery.Order;
 import co.binapp.android.backend.core.CloudQuery.Scope;
 import co.binapp.android.backend.core.CloudCallbackHandler;
 import co.binapp.android.backend.core.CloudEntity;
+import co.binapp.android.data.ListAdapter;
 import co.binapp.android.data.AnimationConstants.Transitions;
+import co.binapp.android.data.AppObjects.BinObject;
 import co.binapp.android.data.DataStoreConstants.Bins;
+import co.binapp.android.data.DataStoreConstants.Bins.Keys;
 
 public class MainView extends DSConnectedActivity implements OnListener, OnClickListener {
 	
@@ -30,7 +32,10 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 	private ImageView addButton;
 	private ListView binListView;
 	
-	private List<CloudEntity> binList = new LinkedList<CloudEntity>();
+	/* Data Elements */
+	private List<CloudEntity> binList = new ArrayList<CloudEntity>();
+	private ArrayList<BinObject> binObjectArrayList = new ArrayList<BinObject>();
+	private ListAdapter listAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,8 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 		addButton.setOnClickListener(this);
 		
 		binListView = (ListView) findViewById(R.id.binListView);
+		listAdapter = new ListAdapter(getApplicationContext());
+		binListView.setAdapter(listAdapter);
 	}
 
 	private void getPosts() {
@@ -57,6 +64,19 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 				binList = results;
 				for (CloudEntity ce : binList) {
 					Log.i(TAG, ce.get(Bins.Keys.CONTENT).toString()); // TODO that's how information is received from the CE
+					binObjectArrayList.add(new BinObject(
+							Integer.parseInt(ce.get(Keys.TYPE).toString()), // Type 
+							ce.get(Keys.TITLE).toString(), // Title
+							ce.get(Keys.CONTENT).toString(), // Content
+							ce.get(Keys.IMAGE_URL).toString(), // ImgUrl
+							ce.get(Keys.URL).toString(), // Url
+							ce.get(Keys.TAGS).toString(), // Tags
+							ce.get(Keys.COLOR).toString()) // Color
+					);
+				}
+				if (binObjectArrayList.size() > 0) {
+					listAdapter.updateListInAdapter(binObjectArrayList);
+					binObjectArrayList = null;
 				}
 			}
 			
