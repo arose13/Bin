@@ -9,8 +9,10 @@ import co.binapp.android.R;
 import co.binapp.android.data.AppObjects.BinListViewHolder;
 import co.binapp.android.data.AppObjects.BinObject;
 import co.binapp.android.data.DataStoreConstants.Bins.TypeValues;
-
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +24,20 @@ import android.widget.TextView;
 public class ListAdapter extends BaseAdapter {
 	
 	Context viewContext;
+	AssetManager assets;
+	Display display;
+	AQuery aq;
+	Point size = new Point();
+	Fonts mFonts = new Fonts();
+	ImageOptions imageOptions = new ImageOptions();
 	ArrayList<BinObject> binsArrayList = new ArrayList<BinObject>();
 	
-	public ListAdapter(Context inContext) {
+	public ListAdapter(Context inContext, AssetManager inAssets, Display inDisplay) {
 		viewContext = inContext;
+		assets = inAssets;
+		display = inDisplay;
+		display.getSize(size);
+		aq = new AQuery(viewContext);
 	}
 	
 	public boolean updateListInAdapter(ArrayList<BinObject> inputBinArrayList) {
@@ -61,8 +73,6 @@ public class ListAdapter extends BaseAdapter {
 		
 		/* Important class instantiations */
 		BinListViewHolder holder = new BinListViewHolder();
-		AQuery aq = new AQuery(viewContext);
-		ImageOptions imageOptions = new ImageOptions();
 		LayoutInflater inflater = (LayoutInflater) viewContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 		convertView = null;
@@ -111,8 +121,21 @@ public class ListAdapter extends BaseAdapter {
 		holder.content = (TextView) convertView.findViewById(R.id.imageCard_Body);
 		convertView.setTag(holder);
 		
+		/* Load content below */
 		holder.title.setText(binObject.title);
 		holder.content.setText(binObject.content);
+		
+		if (StringProcessor.hasContents(binObject.title)) {
+			mFonts.typeFaceConstructor(holder.title, Fonts.Roboto.Slab.REGULAR, assets);
+			holder.title.setVisibility(View.VISIBLE);
+		}
+		
+		if (StringProcessor.hasContents(binObject.imgurl)) {
+			holder.image.setVisibility(View.VISIBLE);
+			aq.id(holder.image).image(binObject.imgurl, imageOptions);
+		}
+		
+		mFonts.typeFaceConstructor(holder.content, Fonts.Roboto.LIGHT, assets);
 		
 		return convertView;
 	}
@@ -121,11 +144,25 @@ public class ListAdapter extends BaseAdapter {
 		View convertView;
 		convertView = inflater.inflate(R.layout.text_card, parent, false);
 		holder.title = (TextView) convertView.findViewById(R.id.textCard_Title);
+		holder.image = (ImageView) convertView.findViewById(R.id.textCard_Image);
 		holder.content = (TextView) convertView.findViewById(R.id.textCard_Body);
 		convertView.setTag(holder);
 		
-		holder.title.setText(binObject.content);
+		/* Load content below */
 		holder.content.setText(binObject.content);
+		
+		if (StringProcessor.hasContents(binObject.title)) {
+			holder.title.setText(binObject.title);
+			mFonts.typeFaceConstructor(holder.title, Fonts.Roboto.Slab.REGULAR, assets);
+			holder.title.setVisibility(View.VISIBLE);
+		}
+		
+		if (StringProcessor.hasContents(binObject.imgurl)) {
+			holder.image.setVisibility(View.VISIBLE);
+			aq.id(holder.image).image(binObject.imgurl);
+		}
+
+		mFonts.typeFaceConstructor(holder.content, Fonts.Roboto.LIGHT, assets);
 		
 		return convertView;
 	}

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin" >
 
     <ImageView
         android:id="@+id/imageCard_Image"
@@ -15,7 +16,9 @@
         android:id="@+id/imageCard_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:textSize="@dimen/textHeadline"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/imageCard_Body"

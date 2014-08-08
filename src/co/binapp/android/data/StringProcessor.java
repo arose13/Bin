@@ -20,4 +20,13 @@ public class StringProcessor {
 		url = url.replace(WWW, "");
 		return url;
 	}
+	
+	public static boolean hasContents(String input) {
+		if (!input.equals("") && input != null) {
+			return true; // Has contents
+		} else {
+			return false;
+		}
+	}
+	
 }

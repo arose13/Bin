@@ -50,7 +50,7 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 		addButton.setOnClickListener(this);
 		
 		binListView = (ListView) findViewById(R.id.binListView);
-		listAdapter = new ListAdapter(getApplicationContext());
+		listAdapter = new ListAdapter(getApplicationContext(), getAssets(), getWindowManager().getDefaultDisplay());
 		binListView.setAdapter(listAdapter);
 	}
 

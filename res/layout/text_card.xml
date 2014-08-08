@@ -16,16 +16,21 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Title"
-            android:textSize="@dimen/textTitle"
+            android:textSize="@dimen/textHeadline"
             android:visibility="gone" />
+        
+        <ImageView
+            android:id="@+id/textCard_Image"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/textCard_Body"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Please Wait"
             android:textSize="@dimen/textBody" />
     </LinearLayout>
 
