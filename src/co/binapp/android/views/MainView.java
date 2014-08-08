@@ -52,6 +52,7 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 		binListView = (ListView) findViewById(R.id.binListView);
 		listAdapter = new ListAdapter(getApplicationContext(), getAssets(), getWindowManager().getDefaultDisplay());
 		binListView.setAdapter(listAdapter);
+		binListView.setDividerHeight(0);
 	}
 
 	private void getPosts() {

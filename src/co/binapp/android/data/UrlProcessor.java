@@ -115,12 +115,9 @@ public class UrlProcessor {
 		String imgUrl = "";
 		if (doc != null) {
 			Log.d(TAG, doc.body().html());
-			Elements imgTags = doc.select("img");
-			for (Element imgtag : imgTags) {
-				if (!(imgtag.attr("alt")!="")) {
-					imgUrl = imgtag.attr("src");
-				}
-			}
+			Element imgTag = doc.select("div.media > img").first();
+			Log.d(TAG, imgTag.html());
+			imgUrl = imgTag.attr("src");
 			Log.d(TAG, "getTwitterImageURL returned: " + imgUrl);
 		}
 		

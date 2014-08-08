@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Bin</string>
-    <string name="write_something">Write Something #8230</string>
+    <string name="write_something">Write Something...</string>
     <string name="write_title">Title (optional)</string>
     <string name="hello_world">Hello world!</string>
     <string name="switch_account">Switch Account</string>

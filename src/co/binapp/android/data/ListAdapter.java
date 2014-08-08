@@ -9,6 +9,7 @@ import co.binapp.android.R;
 import co.binapp.android.data.AppObjects.BinListViewHolder;
 import co.binapp.android.data.AppObjects.BinObject;
 import co.binapp.android.data.DataStoreConstants.Bins.TypeValues;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Point;
@@ -132,7 +133,23 @@ public class ListAdapter extends BaseAdapter {
 		
 		if (StringProcessor.hasContents(binObject.imgurl)) {
 			holder.image.setVisibility(View.VISIBLE);
-			aq.id(holder.image).image(binObject.imgurl, imageOptions);
+			aq.id(holder.image).image(
+					binObject.imgurl, // Image URL 
+					true, // memCache
+					true, // fileCache
+					0, // target width
+					0, // fall back id
+					null, // preset
+					AQuery.FADE_IN, // animation ID
+					AQuery.RATIO_PRESERVE // aspect ratio
+					);
+			
+			/*Bitmap bmp = ((BitmapDrawable) holder.image.getDrawable()).getBitmap();
+			ColorArt colorPal = new ColorArt(bmp);
+			
+			holder.title.setTextColor(colorPal.getPrimaryColor());
+			holder.content.setTextColor(colorPal.getSecondaryColor());*/
+			
 		}
 		
 		mFonts.typeFaceConstructor(holder.content, Fonts.Roboto.LIGHT, assets);
@@ -159,7 +176,22 @@ public class ListAdapter extends BaseAdapter {
 		
 		if (StringProcessor.hasContents(binObject.imgurl)) {
 			holder.image.setVisibility(View.VISIBLE);
-			aq.id(holder.image).image(binObject.imgurl);
+			aq.id(holder.image).image(
+					binObject.imgurl, // Image URL 
+					true, // memCache
+					true, // fileCache
+					0, // target width
+					0, // fall back id
+					null, // preset
+					AQuery.FADE_IN, // animation ID
+					AQuery.RATIO_PRESERVE // aspect ratio
+					);
+			
+			/*Bitmap bmp = ((BitmapDrawable) holder.image.getDrawable()).getBitmap();
+			ColorArt colorPal = new ColorArt(bmp);
+			
+			holder.title.setTextColor(colorPal.getPrimaryColor());
+			holder.content.setTextColor(colorPal.getSecondaryColor());*/
 		}
 
 		mFonts.typeFaceConstructor(holder.content, Fonts.Roboto.LIGHT, assets);
