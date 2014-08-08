@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+
 import co.binapp.android.R;
 import co.binapp.android.activities.DSConnectedActivity;
 import co.binapp.android.backend.core.CloudBackendFragment.OnListener;
@@ -50,7 +51,7 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 		addButton.setOnClickListener(this);
 		
 		binListView = (ListView) findViewById(R.id.binListView);
-		listAdapter = new ListAdapter(getApplicationContext(), getAssets(), getWindowManager().getDefaultDisplay());
+		listAdapter = new ListAdapter(this, getAssets(), getWindowManager().getDefaultDisplay());
 		binListView.setAdapter(listAdapter);
 		binListView.setDividerHeight(0);
 	}
