@@ -21,7 +21,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/* TODO Test this entire class */
 public class ListAdapter extends BaseAdapter {
 	
 	Context viewContext;
