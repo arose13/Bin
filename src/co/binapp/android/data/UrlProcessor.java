@@ -7,7 +7,6 @@ import java.net.URL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -43,18 +42,21 @@ public class UrlProcessor {
 		if (isAnImageURL(url)) {
 			// The URL itself is a ImageURL
 			return url;
-		} else if (url.contains("9gag.com/gag/")) {
+		} else if (is9gagURL(url)) {
 			// 9gag URL
 			return get9GagImageUrl(url);
-		} else if (url.contains("twitter.com") && url.contains("status")) {
+		} else if (isTwitterURL(url)) {
 			// Twitter URL
 			return getTwitterImageURL(url);
-		} else if (url.contains("instagram.com/p/")) {
+		} else if (isInstagramURL(url)) {
 			// InstaGram URL
 			return getInstagramURL(url);
 		} else if (isYoutubeVideo(url)) {
 			// YouTube Video URL
 			return getYoutubeImageURL(url);
+		} else if (isImgurURL(url)) {
+			// Imgur URL
+			return getImgurImageURL(url);
 		} else {
 			// General web site Image check
 			return getGeneralImageURL(url);
@@ -79,7 +81,20 @@ public class UrlProcessor {
 	private String getInstagramURL(String url) {
 		return getGeneralImageURL(url);
 	}
-
+	
+	// TODO Test this
+	private String getImgurImageURL(String url) {
+		Document doc = getWebPageAsIfBrowser(url);
+		String imgUrl = "";
+		if (doc != null) {
+			Element linkTag = doc.select("link[rel=image_src]").first();
+			if (linkTag != null) {
+				imgUrl = linkTag.attr("href");
+			}
+		}
+		return imgUrl;
+	}	
+	
 	private String get9GagImageUrl(String url) {
 		// Try to get 9gag web page
 		Document doc = getWebPage(url);
@@ -161,7 +176,7 @@ public class UrlProcessor {
 		}
 	}
 	
-	/* Checks if it a YouTube video */
+	/* URL Checks below */
 	public boolean isYoutubeVideo(String url) {
 		if ((url.contains("youtube.com") && url.contains("watch?v=")) || (url.contains("youtu.be/"))) {
 			return true;
@@ -169,6 +184,39 @@ public class UrlProcessor {
 			return false;
 		}
 	}
+	
+	private boolean isTwitterURL(String url) {
+		if (url.contains("twitter.com") && url.contains("status")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private boolean isInstagramURL(String url) {
+		if (url.contains("instagram.com/p/")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private boolean isImgurURL(String url) {
+		if (url.contains("imgur.com/gallery/")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean is9gagURL(String url) {
+		if (url.contains("9gag.com/gag/")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	/* End of URL checks */
 	
 	private Document getWebPage(String url) {
 		Document doc = null;		
