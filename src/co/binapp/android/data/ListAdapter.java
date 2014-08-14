@@ -143,12 +143,6 @@ public class ListAdapter extends BaseAdapter {
 					AQuery.RATIO_PRESERVE // aspect ratio
 					);
 			
-			/*Bitmap bmp = ((BitmapDrawable) holder.image.getDrawable()).getBitmap();
-			ColorArt colorPal = new ColorArt(bmp);
-			
-			holder.title.setTextColor(colorPal.getPrimaryColor());
-			holder.content.setTextColor(colorPal.getSecondaryColor());*/
-			
 		}
 		
 		mFonts.typeFaceConstructor(holder.content, Fonts.Roboto.LIGHT, assets);
@@ -185,12 +179,6 @@ public class ListAdapter extends BaseAdapter {
 					AQuery.FADE_IN, // animation ID
 					AQuery.RATIO_PRESERVE // aspect ratio
 					);
-			
-			/*Bitmap bmp = ((BitmapDrawable) holder.image.getDrawable()).getBitmap();
-			ColorArt colorPal = new ColorArt(bmp);
-			
-			holder.title.setTextColor(colorPal.getPrimaryColor());
-			holder.content.setTextColor(colorPal.getSecondaryColor());*/
 		}
 
 		mFonts.typeFaceConstructor(holder.content, Fonts.Roboto.LIGHT, assets);
