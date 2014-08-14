@@ -1,22 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical" >
-    
-    <EditText
-        android:id="@+id/entryviewEditTextTitle"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/entryviewEditTextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/write_title"
+            android:inputType="textCapWords|textMultiLine" />
+
+        <EditText
+            android:id="@+id/entryviewEditTextBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:hint="@string/write_something"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <EditText
+            android:id="@+id/entryviewEditTextTextQuote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/quote"
+            android:inputType="textCapWords"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/write_title"
-        android:inputType="textCapWords|textMultiLine" />
-    
-    <EditText
-        android:id="@+id/entryviewEditTextBody"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autoLink="all"
-        android:hint="@string/write_something"
-        android:inputType="textCapSentences|textMultiLine" />
+        android:layout_margin="@dimen/margin"
+        tools:ignore="ContentDescription" >
+
+        <ImageView
+            android:id="@+id/entryviewFavoriteBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/circle_unselected_btn"
+            android:padding="@dimen/marginSmall"
+            android:src="@drawable/favorite_icon" />
+
+        <ImageView
+            android:id="@+id/entryviewQuoteBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle_unselected_btn"
+            android:padding="@dimen/marginSmall" />
+
+        <ImageView
+            android:id="@+id/entryviewPrivateBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/circle_unselected_btn"
+            android:padding="@dimen/marginSmall"
+            android:src="@drawable/lock_icon" />
+        
+    </RelativeLayout>
 
 </LinearLayout>
