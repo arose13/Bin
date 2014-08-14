@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/listViewBackground" >
-    
+
     <ListView
         android:id="@+id/binListView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
-    
+
     <ImageView
         android:id="@+id/addBtn"
         android:layout_width="56dp"
@@ -18,6 +18,8 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/margin"
         android:background="@drawable/add_btn"
+        android:src="@drawable/add_icon"
+        android:padding="@dimen/margin"
         android:contentDescription="@string/add_a_bin" />
-    
+
 </RelativeLayout>
