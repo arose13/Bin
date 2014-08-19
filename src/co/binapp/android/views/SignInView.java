@@ -85,11 +85,18 @@ public class SignInView extends ViewActivity implements OnClickListener {
 		if (status.getErrorCode() == ConnectionResult.SUCCESS) {
 			/* Saving user to Shared Preferences */
 			Log.d(TAG, "UserPlusID = " + userPlusID);
-			if (sharedPrefs.saveUserToSharedPrefs(userPlusID, contextActivity)) {
+			
+			if (sharedPrefs.saveUserIDToSharedPrefs(userPlusID, contextActivity)) {
 				Log.d(TAG, "UserID saved to sharedPrefs");
 			} else {
 				Log.e(TAG, "UserID was not saved");
 			}
+			
+			if (sharedPrefs.saveUserNameToSharedPrefs(userFullName, contextActivity)) {
+				Log.d(TAG, "UserName saved to sharedPrefs");
+			} else {
+				Log.e(TAG, "UserName was not saved");
+			}			
 			
 			// Goto MainView
 			gotoView(new Intent(SignInView.this, MainView.class), AnimationConstants.Transitions.FROM_RIGHT);

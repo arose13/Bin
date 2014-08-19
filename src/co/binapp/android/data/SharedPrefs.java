@@ -13,6 +13,7 @@ public class SharedPrefs {
 	
 	public class Keys {
 		public static final String USERID = appPackage + "USERID"; // Last logged in email
+		public static final String USERNAME = appPackage + "USERNAME"; // User Name
 		public static final String PAYINGUSER = appPackage + "PAYINGUSER"; // 1 = true 0 = false
 		public static final String NUM_OF_BINS = appPackage + "NUMBEROFBINS"; // Number of entries in the DS
 	}
@@ -22,13 +23,37 @@ public class SharedPrefs {
 		return context.getSharedPreferences(key, Context.MODE_PRIVATE);
 	}
 	
-	/* UserEmail Methods */
-	private SharedPreferences getUserEmailSharedPrefs(Context context) {
+	/* User Methods */
+	private SharedPreferences getUserNameSharedPrefs(Context context) {
+		return buildSharedPreference(Keys.USERNAME, context);
+	}
+	
+	private SharedPreferences getUserIDSharedPrefs(Context context) {
 		return buildSharedPreference(Keys.USERID, context);
 	}
 	
-	public boolean saveUserToSharedPrefs(String userID, Context context) {
-		SharedPreferences.Editor editor = getUserEmailSharedPrefs(context).edit();
+	public boolean saveUserNameToSharedPrefs(String userName, Context context) {
+		SharedPreferences.Editor editor = getUserNameSharedPrefs(context).edit();
+		
+		if ((!userName.isEmpty()) && (userName != "")) {
+			editor.putString(Keys.USERNAME, userName);
+			editor.commit();
+			
+			if (!readFromSavedUserName(context).equals("")) {
+				// UserName saved correctly
+				return true;
+			} else {
+				// Error on UserName save
+				return false;
+			}
+			
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean saveUserIDToSharedPrefs(String userID, Context context) {
+		SharedPreferences.Editor editor = getUserIDSharedPrefs(context).edit();
 		
 		if ((!userID.isEmpty()) && (userID != "")) {
 			editor.putString(Keys.USERID, userID);
@@ -48,7 +73,11 @@ public class SharedPrefs {
 	}
 	
 	public String readFromSavedUser(Context appContext) {
-		return getUserEmailSharedPrefs(appContext).getString(Keys.USERID, "");
+		return getUserIDSharedPrefs(appContext).getString(Keys.USERID, "");
+	}
+	
+	public String readFromSavedUserName(Context appContext) {
+		return getUserNameSharedPrefs(appContext).getString(Keys.USERNAME, "");
 	}
 	/* End of UserEmail Methods */
 	
