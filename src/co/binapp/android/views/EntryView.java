@@ -185,7 +185,7 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		
 		Log.i(TAG, "[" + entryType + " , " + title + " , " + content + " ]");
 		
-		return true ; /* TODO when the save to DS is complete this must return true! */
+		return true;
 	}
 
 	private void saveEntry(int type, String title, String content, String url, String imageUrl, String tags, String hexColor) {
@@ -198,7 +198,7 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		newEntry.put(Bins.Keys.IMAGE_URL, imageUrl);
 		newEntry.put(Bins.Keys.TAGS, tags);
 		newEntry.put(Bins.Keys.COLOR, hexColor);
-		newEntry.put(Bins.Keys.USERID, sharedPrefs.readFromSavedUser()); /* TODO fill in userID */
+		newEntry.put(Bins.Keys.USERID, sharedPrefs.readFromSavedUser());
 		
 		CloudCallbackHandler<CloudEntity> handler = new CloudCallbackHandler<CloudEntity>() {
 			
