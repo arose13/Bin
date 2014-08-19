@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 public class SharedPrefs {
 	
+	private Context context;
+	
 	private static final String appPackage = "co.binapp.android.";
 	
 	public static final int TRUE = 1;
@@ -18,28 +20,32 @@ public class SharedPrefs {
 		public static final String NUM_OF_BINS = appPackage + "NUMBEROFBINS"; // Number of entries in the DS
 	}
 	
+	public SharedPrefs(Context inputContext) {
+		context = inputContext;
+	}
+	
 	/* Shared Preferences Methods Below */
-	private SharedPreferences buildSharedPreference(String key, Context context) {
+	private SharedPreferences buildSharedPreference(String key) {
 		return context.getSharedPreferences(key, Context.MODE_PRIVATE);
 	}
 	
 	/* User Methods */
-	private SharedPreferences getUserNameSharedPrefs(Context context) {
-		return buildSharedPreference(Keys.USERNAME, context);
+	private SharedPreferences getUserNameSharedPrefs() {
+		return buildSharedPreference(Keys.USERNAME);
 	}
 	
-	private SharedPreferences getUserIDSharedPrefs(Context context) {
-		return buildSharedPreference(Keys.USERID, context);
+	private SharedPreferences getUserIDSharedPrefs() {
+		return buildSharedPreference(Keys.USERID);
 	}
 	
-	public boolean saveUserNameToSharedPrefs(String userName, Context context) {
-		SharedPreferences.Editor editor = getUserNameSharedPrefs(context).edit();
+	public boolean saveUserNameToSharedPrefs(String userName) {
+		SharedPreferences.Editor editor = getUserNameSharedPrefs().edit();
 		
 		if ((!userName.isEmpty()) && (userName != "")) {
 			editor.putString(Keys.USERNAME, userName);
 			editor.commit();
 			
-			if (!readFromSavedUserName(context).equals("")) {
+			if (!readFromSavedUserName().equals("")) {
 				// UserName saved correctly
 				return true;
 			} else {
@@ -52,14 +58,14 @@ public class SharedPrefs {
 		}
 	}
 	
-	public boolean saveUserIDToSharedPrefs(String userID, Context context) {
-		SharedPreferences.Editor editor = getUserIDSharedPrefs(context).edit();
+	public boolean saveUserIDToSharedPrefs(String userID) {
+		SharedPreferences.Editor editor = getUserIDSharedPrefs().edit();
 		
 		if ((!userID.isEmpty()) && (userID != "")) {
 			editor.putString(Keys.USERID, userID);
 			editor.commit();
 			
-			if (!readFromSavedUser(context).equals("")) {
+			if (!readFromSavedUser().equals("")) {
 				// The Email was corrected saved
 				return true;
 			} else {
@@ -72,12 +78,12 @@ public class SharedPrefs {
 		}
 	}
 	
-	public String readFromSavedUser(Context appContext) {
-		return getUserIDSharedPrefs(appContext).getString(Keys.USERID, "");
+	public String readFromSavedUser() {
+		return getUserIDSharedPrefs().getString(Keys.USERID, "");
 	}
 	
-	public String readFromSavedUserName(Context appContext) {
-		return getUserNameSharedPrefs(appContext).getString(Keys.USERNAME, "");
+	public String readFromSavedUserName() {
+		return getUserNameSharedPrefs().getString(Keys.USERNAME, "");
 	}
 	/* End of UserEmail Methods */
 	

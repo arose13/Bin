@@ -169,8 +169,11 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 			}
 
 		} else {
-			/* Ordinary Entry */
+			/* Ordinary Entry or Quote */
 			entryType = TypeValues.TEXT;
+			if (!content.isEmpty() && title.isEmpty()) {
+				entryType = TypeValues.QUOTE;
+			}
 		}
 		
 		if (privateEntry) {
@@ -195,7 +198,7 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		newEntry.put(Bins.Keys.IMAGE_URL, imageUrl);
 		newEntry.put(Bins.Keys.TAGS, tags);
 		newEntry.put(Bins.Keys.COLOR, hexColor);
-		newEntry.put(Bins.Keys.USERID, Bins.TEST_USERID); /* TODO fill in userID */
+		newEntry.put(Bins.Keys.USERID, sharedPrefs.readFromSavedUser()); /* TODO fill in userID */
 		
 		CloudCallbackHandler<CloudEntity> handler = new CloudCallbackHandler<CloudEntity>() {
 			

@@ -11,7 +11,7 @@ import com.google.android.gms.plus.model.people.PersonBuffer;
 import co.binapp.android.R;
 import co.binapp.android.data.Fonts;
 import co.binapp.android.data.GPlusConstants;
-
+import co.binapp.android.data.SharedPrefs;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,6 +24,7 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 	
 	public static final String TAG = BaseActivity.class.getName();
 	
+	protected SharedPrefs sharedPrefs;
 	protected Fonts mFonts = new Fonts();
 	
 	protected static boolean wifiFlag = false;
@@ -45,6 +46,7 @@ public abstract class BaseActivity extends Activity implements ConnectionCallbac
 		
 		/* Starting all app's context */
 		contextActivity = getApplicationContext();
+		sharedPrefs = new SharedPrefs(this);
 		
 		/* Google Plus Setup */
 		mPlusClient = new PlusClient.Builder(this, this, this)

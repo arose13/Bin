@@ -17,13 +17,10 @@ import co.binapp.android.activities.ViewActivity;
 import co.binapp.android.data.Fonts.Amatic;
 import co.binapp.android.data.AnimationConstants;
 import co.binapp.android.data.GPlusConstants;
-import co.binapp.android.data.SharedPrefs;
 
 public class SignInView extends ViewActivity implements OnClickListener {
 	
 	public static final String TAG = SignInView.class.getSimpleName();
-	
-	private SharedPrefs sharedPrefs = new SharedPrefs();
 	
 	private TextView appTitle;
 	private View signinButton;
@@ -86,13 +83,13 @@ public class SignInView extends ViewActivity implements OnClickListener {
 			/* Saving user to Shared Preferences */
 			Log.d(TAG, "UserPlusID = " + userPlusID);
 			
-			if (sharedPrefs.saveUserIDToSharedPrefs(userPlusID, contextActivity)) {
+			if (sharedPrefs.saveUserIDToSharedPrefs(userPlusID)) {
 				Log.d(TAG, "UserID saved to sharedPrefs");
 			} else {
 				Log.e(TAG, "UserID was not saved");
 			}
 			
-			if (sharedPrefs.saveUserNameToSharedPrefs(userFullName, contextActivity)) {
+			if (sharedPrefs.saveUserNameToSharedPrefs(userFullName)) {
 				Log.d(TAG, "UserName saved to sharedPrefs");
 			} else {
 				Log.e(TAG, "UserName was not saved");

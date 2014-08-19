@@ -1,8 +1,11 @@
 package co.binapp.android.activities;
 
 import co.binapp.android.backend.core.CloudBackendFragment;
+import co.binapp.android.data.AnimationConstants;
+import co.binapp.android.views.SignInView;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -41,6 +44,10 @@ public abstract class DSConnectedActivity extends ViewActivity {
     }
 
 	protected void checkPreferences() {
+		if (sharedPrefs.readFromSavedUser().equals("")) {
+			// TODO This user never logged in
+			gotoView(new Intent(this, SignInView.class), AnimationConstants.Transitions.FROM_BOTTOM);
+		}
 		Log.d(TAG, "checkPreferences ran");
 	}
 }
