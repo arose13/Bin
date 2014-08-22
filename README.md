@@ -17,3 +17,4 @@ TIMELINE
 	non app related problems stalled progress. All because the Mobile BackEnd Starter is buggy)
 - August 6th 2014 = ListAdapter and support classes started
 - August 7th 2014 = ListAdapter listing functionality complete
+- August 19th 2014 = SharedPrefs functionality completed
