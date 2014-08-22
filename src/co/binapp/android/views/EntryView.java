@@ -137,9 +137,11 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 			if (entryType != TypeValues.QUOTE) {
 				entryType = TypeValues.QUOTE;
 				// TODO Modify button state
+				// TODO Show quote editText
 			} else {
 				entryType = TypeValues.TEXT;
 				// TODO modify button state
+				// TODO Hide and clear quote Edittext
 			}
 			return true;
 			
@@ -224,7 +226,6 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		newEntry.put(Bins.Keys.URL, url);
 		newEntry.put(Bins.Keys.IMAGE_URL, imageUrl);
 		newEntry.put(Bins.Keys.TAGS, tags);
-		newEntry.put(Bins.Keys.COLOR, hexColor);
 		newEntry.put(Bins.Keys.USERID, sharedPrefs.readFromSavedUser());
 		newEntry.put(Bins.Keys.FAVORITE, isFavoriteEntry());
 		newEntry.put(Bins.Keys.PRIVATE, isPrivateEntry());
@@ -266,13 +267,11 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 	}
 	
 	@Override
-	public void onCreateFinished() {
-		// TODO from implements OnListener		
+	public void onCreateFinished() {		
 	}
 
 	@Override
 	public void onBroadcastMessageReceived(List<CloudEntity> message) {
-		// TODO from implements OnListener 	
 	}
 
 	
