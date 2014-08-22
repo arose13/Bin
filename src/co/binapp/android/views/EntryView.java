@@ -17,6 +17,8 @@ import co.binapp.android.backend.core.CloudBackendFragment.OnListener;
 import co.binapp.android.backend.core.CloudCallbackHandler;
 import co.binapp.android.backend.core.CloudEntity;
 import co.binapp.android.data.DataStoreConstants.Bins;
+import co.binapp.android.data.DataStoreConstants.Bins.FavoriteValues;
+import co.binapp.android.data.DataStoreConstants.Bins.PrivateValues;
 import co.binapp.android.data.DataStoreConstants.Bins.TypeValues;
 import co.binapp.android.data.Fonts.Roboto;
 import co.binapp.android.data.DataStoreConstants;
@@ -28,11 +30,13 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 	public static final String TAG = EntryView.class.getSimpleName();
 	
 	private boolean privateEntry = false;
+	private boolean favoriteEntry = false;
 	private int entryType = TypeValues.TEXT;
 	
 	private Menu entryViewMenu;
 	private EditText inputTitle;
 	private EditText inputBody;
+	private EditText inputQuote;
 	
 	private Intent externalIntent;
 	private String externalIntentAction;
@@ -89,8 +93,10 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 	private void initViews() {
 		inputTitle = (EditText) findViewById(R.id.entryviewEditTextTitle);
 		inputBody = (EditText) findViewById(R.id.entryviewEditTextBody);
+		inputQuote = (EditText) findViewById(R.id.entryviewEditTextQuote);
 		mFonts.typeFaceConstructor(inputTitle, Roboto.BOLD, getAssets());
 		mFonts.typeFaceConstructor(inputBody, Roboto.LIGHT, getAssets());
+		mFonts.typeFaceConstructor(inputQuote, Roboto.Slab.REGULAR, getAssets());
 	}
 	
 	/* This modifies the actionBar button */
@@ -116,6 +122,36 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 				});
 			}
 			return true;
+			
+		case R.id.entryviewFavorite:
+			if (favoriteEntry == false) {
+				favoriteEntry = true;
+				// TODO change button to clicked
+			} else {
+				favoriteEntry = false;
+				// TODO change button to unClicked
+			}
+			return true;
+			
+		case R.id.entryviewQuote:
+			if (entryType != TypeValues.QUOTE) {
+				entryType = TypeValues.QUOTE;
+				// TODO Modify button state
+			} else {
+				entryType = TypeValues.TEXT;
+				// TODO modify button state
+			}
+			return true;
+			
+		case R.id.entryviewPrivate:
+			if (privateEntry == false) {
+				privateEntry = true;
+				// TODO modify button state active
+			} else {
+				// TODO modify button state back to clear
+				privateEntry = false;
+			}
+			return true;
 
 		default:
 			return super.onOptionsItemSelected(item);
@@ -123,7 +159,7 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 	}
 	
 	private boolean isEditTextViewsNotEmpty() {
-		if ((inputBody.getText().toString() != "") && (inputBody.getText().toString() != null)) {
+		if ((inputBody.getText().toString().trim() != "") && (inputBody.getText().toString().trim() != null) && (!inputBody.getText().toString().isEmpty())) {
 			return true;
 		} else {
 			return false;
@@ -176,15 +212,6 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 			}
 		}
 		
-		if (privateEntry) {
-			// It is private therefore change the type and save
-			entryType = TypeValues.PRIVATE;
-		} else {
-			// It is not private therefore don't modify the entryType
-		}
-		
-		Log.i(TAG, "[" + entryType + " , " + title + " , " + content + " ]");
-		
 		return true;
 	}
 
@@ -199,6 +226,8 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		newEntry.put(Bins.Keys.TAGS, tags);
 		newEntry.put(Bins.Keys.COLOR, hexColor);
 		newEntry.put(Bins.Keys.USERID, sharedPrefs.readFromSavedUser());
+		newEntry.put(Bins.Keys.FAVORITE, isFavoriteEntry());
+		newEntry.put(Bins.Keys.PRIVATE, isPrivateEntry());
 		
 		CloudCallbackHandler<CloudEntity> handler = new CloudCallbackHandler<CloudEntity>() {
 			
@@ -216,6 +245,24 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 		
 		// Execute newEntry insertion
 		mProcessingFragment.getCloudBackend().insert(newEntry, handler);
+	}
+	
+	private int isPrivateEntry() {
+		/* This is called when the entry is being saved */
+		if (privateEntry) {
+			return PrivateValues.PRIVATE;
+		} else {
+			return PrivateValues.DEFAULT;
+		}
+	}
+	
+	private int isFavoriteEntry() {
+		/* This is called when the entry is being saved */
+		if (favoriteEntry) {
+			return FavoriteValues.FAVORITE;
+		} else {
+			return FavoriteValues.DEFAULT;
+		}
 	}
 	
 	@Override

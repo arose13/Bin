@@ -15,6 +15,7 @@ public class DataStoreConstants {
 			public static final String TAGS = "tags";         // Tags 
 			public static final String USERID = "userid";     // User that created the image
 			public static final String FAVORITE = "favorite"; // 0 = not favorite 1 = favorite [int]
+			public static final String PRIVATE = "private"; // 0 = not private 1 = private [int]
 			public static final String COLOR = "color";       // The hex color for the card
 		}
 		
@@ -24,12 +25,16 @@ public class DataStoreConstants {
 			public static final int LINK = 3;
 			public static final int PHOTO = 4;
 			public static final int VIDEO = 5;
-			public static final int PRIVATE = 9;
 		}
 		
 		public static class FavoriteValues {
 			public static final int DEFAULT = 0;
 			public static final int FAVORITE = 1;
+		}
+		
+		public static class PrivateValues {
+			public static final int DEFAULT = 0;
+			public static final int PRIVATE = 1;
 		}
 	}
 	

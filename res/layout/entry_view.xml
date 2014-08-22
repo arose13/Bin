@@ -6,12 +6,6 @@
     android:background="@android:color/white"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
         <EditText
             android:id="@+id/entryviewEditTextTitle"
             android:layout_width="match_parent"
@@ -28,46 +22,11 @@
             android:inputType="textCapSentences|textMultiLine" />
 
         <EditText
-            android:id="@+id/entryviewEditTextTextQuote"
+            android:id="@+id/entryviewEditTextQuote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/quote"
             android:inputType="textCapWords"
             android:visibility="gone" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"
-        tools:ignore="ContentDescription" >
-
-        <ImageView
-            android:id="@+id/entryviewFavoriteBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:background="@drawable/circle_unselected_btn"
-            android:padding="@dimen/marginSmall"
-            android:src="@drawable/favorite_icon" />
-
-        <ImageView
-            android:id="@+id/entryviewQuoteBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/circle_unselected_btn"
-            android:padding="@dimen/marginSmall" />
-
-        <ImageView
-            android:id="@+id/entryviewPrivateBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/circle_unselected_btn"
-            android:padding="@dimen/marginSmall"
-            android:src="@drawable/lock_icon" />
-        
-    </RelativeLayout>
 
 </LinearLayout>

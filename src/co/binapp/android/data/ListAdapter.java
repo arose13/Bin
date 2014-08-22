@@ -9,7 +9,7 @@ import co.binapp.android.R;
 import co.binapp.android.data.AppObjects.BinListViewHolder;
 import co.binapp.android.data.AppObjects.BinObject;
 import co.binapp.android.data.DataStoreConstants.Bins.TypeValues;
-
+import co.binapp.android.data.Fonts.Roboto;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Point;
@@ -87,6 +87,7 @@ public class ListAdapter extends BaseAdapter {
 				
 			case TypeValues.QUOTE:
 				/* TODO Not implemented */
+				convertView = quoteCard(parent, holder, inflater, binsArrayList.get(position));
 				break;
 				
 			case TypeValues.LINK:
@@ -100,15 +101,24 @@ public class ListAdapter extends BaseAdapter {
 			case TypeValues.VIDEO:
 				convertView = imageCard(parent, holder, inflater, binsArrayList.get(position)); 
 				break;
-				
-			case TypeValues.PRIVATE:
-				/* TODO Not implemented */
-				break;
 
 			default:
 				break;
 			}
 		}
+		
+		return convertView;
+	}
+
+	private View quoteCard(ViewGroup parent, BinListViewHolder holder, LayoutInflater inflater, BinObject binObject) {
+		View convertView;
+		convertView = inflater.inflate(R.layout.quote_card, parent, false);
+		holder.content = (TextView) convertView.findViewById(R.id.quoteCard_Body);
+		convertView.setTag(holder);
+		
+		/* Load content below */
+		holder.content.setText(binObject.content);
+		mFonts.typeFaceConstructor(holder.content, Roboto.Slab.REGULAR, assets);
 		
 		return convertView;
 	}

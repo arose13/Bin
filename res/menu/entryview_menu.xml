@@ -5,5 +5,23 @@
         android:id="@+id/entryviewDoneBtn"
         android:title="@string/done"
         android:showAsAction="always" />
+    
+    <item 
+        android:id="@+id/entryviewFavorite"
+        android:title="Fav"
+        android:icon="@drawable/favorite_icon"
+        android:showAsAction="ifRoom" />
+    
+    <item
+        android:id="@+id/entryviewQuote"
+        android:title="Quote"
+        android:icon="@drawable/quote_icon"
+        android:showAsAction="ifRoom" />
+    
+    <item
+        android:id="@+id/entryviewPrivate"
+        android:title="Private"
+        android:icon="@drawable/lock_icon"
+        android:showAsAction="ifRoom" />
 
 </menu>
