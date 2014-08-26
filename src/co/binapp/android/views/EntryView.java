@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import co.binapp.android.R;
@@ -127,21 +131,34 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 			if (favoriteEntry == false) {
 				favoriteEntry = true;
 				// TODO change button to clicked
+				Drawable iconDrawable = getResources().getDrawable(R.drawable.favorite_icon);
+				iconDrawable.mutate().setColorFilter(Color.rgb(225,7,7), Mode.SRC_IN);
+				item.setIcon(iconDrawable);
 			} else {
 				favoriteEntry = false;
 				// TODO change button to unClicked
+				item.setIcon(R.drawable.favorite_icon);
 			}
 			return true;
 			
 		case R.id.entryviewQuote:
 			if (entryType != TypeValues.QUOTE) {
 				entryType = TypeValues.QUOTE;
-				// TODO Modify button state
 				// TODO Show quote editText
+				inputBody.setHint(R.string.quote);
+				inputQuote.setVisibility(View.VISIBLE);
+				// TODO Modify button state
+				Drawable iconDrawable = getResources().getDrawable(R.drawable.quote_icon);
+				iconDrawable.mutate().setColorFilter(Color.rgb(255,179,0), Mode.SRC_IN);
+				item.setIcon(iconDrawable);
 			} else {
 				entryType = TypeValues.TEXT;
+				// TODO Hide and clear quote EditText
+				inputBody.setHint(R.string.write_something);
+				inputQuote.setText("");
+				inputQuote.setVisibility(View.GONE);
 				// TODO modify button state
-				// TODO Hide and clear quote Edittext
+				item.setIcon(R.drawable.quote_icon);
 			}
 			return true;
 			
@@ -149,9 +166,13 @@ public class EntryView extends DSConnectedActivity implements OnListener {
 			if (privateEntry == false) {
 				privateEntry = true;
 				// TODO modify button state active
+				Drawable iconDrawable = getResources().getDrawable(R.drawable.lock_icon);
+				iconDrawable.mutate().setColorFilter(Color.rgb(93,64,55), Mode.SRC_IN);
+				item.setIcon(iconDrawable);
 			} else {
-				// TODO modify button state back to clear
 				privateEntry = false;
+				// TODO modify button state back to clear
+				item.setIcon(R.drawable.lock_icon);
 			}
 			return true;
 
