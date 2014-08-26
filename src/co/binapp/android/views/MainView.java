@@ -72,9 +72,8 @@ public class MainView extends DSConnectedActivity implements OnListener, OnClick
 							ce.get(Keys.CONTENT).toString(), // Content
 							ce.get(Keys.IMAGE_URL).toString(), // ImgUrl
 							ce.get(Keys.URL).toString(), // Url
-							ce.get(Keys.TAGS).toString(), // Tags
-							ce.get(Keys.COLOR).toString()) // Color
-					);
+							ce.get(Keys.TAGS).toString() // Tags
+					));
 				}
 				if (binObjectArrayList.size() > 0) {
 					listAdapter.updateListInAdapter(binObjectArrayList);
